@@ -20,10 +20,20 @@
       "@/*": ["*"],
       "@images/*": ["images/*"],
       "@routers/*": ["routers/*"],
-      "@pages/*": ["pages/*"],
-    }
+      "@pages/*": ["pages/*"]
+    },
+    "lib": ["es6", "dom"],
+    "allowJs": true,
+    "rootDir": "src",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "importHelpers": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true
   },
-
   "allowSyntheticDefaultImports": true,
   "exclude": ["node_modules", "build"]
 }

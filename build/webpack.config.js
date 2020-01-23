@@ -22,7 +22,7 @@ module.exports = {
     chunkFilename: `chunks/[name].[${devMode ? 'hash' : 'contenthash'}:8].js`
   },
   resolve: {
-    extensions: ['tsx', 'ts', '.js', '.jsx', '.json'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
     alias: {
       '@': resolve('../src'),
       '@components': resolve('../src/components'),
