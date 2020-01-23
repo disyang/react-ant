@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "./src",
     "sourceMap": true,
     "strict": true,
     "module": "CommonJS",
@@ -24,7 +24,6 @@
     },
     "lib": ["es6", "dom"],
     "allowJs": true,
-    "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -34,6 +33,5 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true
   },
-  "allowSyntheticDefaultImports": true,
   "exclude": ["node_modules", "build"]
 }
