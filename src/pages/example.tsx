@@ -14,7 +14,7 @@ export default class app extends Component {
   static propTypes = {
   }
 
-  constructor(props) {
+  constructor(props: object) {
     super(props)
     this.state = {}
   }

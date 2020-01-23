@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "sourceMap": true,
+    "strict": true,
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "target": "es5",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@redux/*": ["redux/*"],
+      "@i18n/*": ["i18n/*"],
+      "@api/*": ["api/*"],
+      "@/*": ["*"],
+      "@images/*": ["images/*"],
+      "@routers/*": ["routers/*"],
+      "@pages/*": ["pages/*"],
+    }
+  },
+
+  "allowSyntheticDefaultImports": true,
+  "exclude": ["node_modules", "build"]
+}

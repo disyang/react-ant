@@ -1,6 +1,5 @@
 import axios from 'axios';
 // import { i18n } from "@i18n";
-import { Message } from 'element-ui';
 
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL = '';
@@ -25,7 +24,7 @@ axios.interceptors.response.use(
   },
   function(error) {
     // 对响应错误做点什么
-    Message.error('错了哦，请求出错了');
+    
     return Promise.reject(error);
   }
 );

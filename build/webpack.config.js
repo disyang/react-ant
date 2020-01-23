@@ -14,7 +14,7 @@ function resolve(r) {
 
 module.exports = {
   entry: {
-    app: resolve('../src/app.js')
+    app: resolve('../src/app.tsx')
   },
   output: {
     filename: `js/[name].[${devMode ? 'hash' : 'contenthash'}:8].js`,
@@ -22,7 +22,7 @@ module.exports = {
     chunkFilename: `chunks/[name].[${devMode ? 'hash' : 'contenthash'}:8].js`
   },
   resolve: {
-    extensions: ['ts', '.js', '.jsx', '.json'],
+    extensions: ['tsx', 'ts', '.js', '.jsx', '.json'],
     alias: {
       '@': resolve('../src'),
       '@components': resolve('../src/components'),
@@ -30,7 +30,8 @@ module.exports = {
       '@pages': resolve('../src/pages'),
       '@apis': resolve('../src/apis'),
       '@redux': resolve('../src/redux'),
-      '@routers': resolve('../src/routers')
+      '@routers': resolve('../src/routers'),
+      '@i18n': resolve('../src/i18n')
     }
   },
   performance: {
@@ -44,7 +45,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
         include: [resolve('../src')],
         loader: 'happypack/loader?id=happyBabel'

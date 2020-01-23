@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   mode: 'production',
   entry: {
-    app: ['react', 'antd', 'axios', 'react-router', 'redux']
+    app: ['react', 'antd', 'axios', 'react-router', 'redux', 'react-router-dom']
   },
   performance: {
     hints: false, // 枚举
