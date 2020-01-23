@@ -6,9 +6,7 @@ import app from '@pages/example'; // 基础
 export default () => (
   <BrowserRouter>
     <Switch>
-      <Route path='/login' component={app} />
-      <Route path='*' component={app} />
-      <Redirect to='/discovery' />
+      <Route path='/' component={app} />
     </Switch>
   </BrowserRouter>
 );
