@@ -20,7 +20,8 @@
       "@/*": ["*"],
       "@images/*": ["images/*"],
       "@routers/*": ["routers/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@hooks/*": ["hooks/*"]
     },
     "lib": ["es6", "dom"],
     "allowJs": true,
