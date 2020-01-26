@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
+import Hooks from '@hooks/index'
 
 const { SubMenu } = Menu;
 
@@ -22,6 +23,7 @@ export default class App extends Component {
         selectedKeys={[this.state.current]}
         mode='horizontal'
       >
+        <Hooks />
         <Menu.Item key='mail'>
           <Icon type='mail' />
           Navigation One
