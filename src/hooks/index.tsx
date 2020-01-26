@@ -7,7 +7,8 @@ export default (): JSX.Element => {
   return (
     <div>
       <p>You clicked {count} times</p>
-      <Button onClick={() => setCount(count + 1)}>Click me</Button>
+      <Button onClick={() => setCount(value => value + 1)}>+</Button>
+      <Button onClick={() => setCount(value => value - 1)}>—</Button>
     </div>
   );
 }
