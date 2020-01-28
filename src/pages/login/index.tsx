@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import './login.less';
+const normal = require('@images/normal.png');
 
 interface propType {
   isLogin: boolean;
@@ -24,46 +25,55 @@ class Login extends Component<propType> {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <Form onSubmit={this.handleSubmit} className='login-form'>
-        <Form.Item>
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: 'Please input your username!' }]
-          })(
-            <Input
-              prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder='Username'
-            />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Please input your Password!' }]
-          })(
-            <Input
-              prefix={<Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />}
-              type='password'
-              placeholder='Password'
-            />
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('remember', {
-            valuePropName: 'checked',
-            initialValue: true
-          })(<Checkbox>Remember me</Checkbox>)}
-          <a className='login-form-forgot' href=''>
-            Forgot password
-          </a>
-          <Button
-            type='primary'
-            htmlType='submit'
-            className='login-form-button'
-          >
-            Log in
-          </Button>
-          Or <a href=''>register now!</a>
-        </Form.Item>
-      </Form>
+      <div className="login_main">
+        <img src={normal} alt=""/>
+        <Form onSubmit={this.handleSubmit} className='login-form'>
+          <Form.Item>
+            {getFieldDecorator('username', {
+              rules: [{ required: true, message: '请输入用户名!' }]
+            })(
+              <Input
+                prefix={
+                  <Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />
+                }
+                allowClear
+                placeholder='用户名'
+              />
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [{ required: true, message: '请输入密码!' }]
+            })(
+              <Input
+                prefix={
+                  <Icon type='lock' style={{ color: 'rgba(0,0,0,.25)' }} />
+                }
+                allowClear
+                type='password'
+                placeholder='密码'
+              />
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('remember', {
+              valuePropName: 'checked',
+              initialValue: true
+            })(<Checkbox>记住我</Checkbox>)}
+            <a className='login-form-forgot' href=''>
+              忘记密码
+            </a>
+            <Button
+              type='primary'
+              htmlType='submit'
+              className='login-form-button'
+            >
+              登录
+            </Button>
+            或者 <a href=''>注册</a>
+          </Form.Item>
+        </Form>
+      </div>
     );
   }
 }
