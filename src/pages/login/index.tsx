@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import './login.less';
+import { login } from '@mocks/login';
 
 interface propType {
   isLogin: boolean;
@@ -17,6 +18,12 @@ interface stateType {
   image: ImageType;
 }
 
+interface form {
+  username: string;
+  password: string;
+  remember: boolean;
+}
+
 class Login extends Component<propType, stateType> {
   constructor(props: propType) {
     super(props);
@@ -28,18 +35,21 @@ class Login extends Component<propType, stateType> {
   private imageSource(): string {
     const { image } = this.state;
     if (image === ImageType.blind) {
-      return require('@images/blindfold.png');
+      return require('@images/normal.png');
     } else if (image === ImageType.greet) {
       return require('@images/greeting.png');
     }
-    return require('@images/normal.png');
+    return require('@images/blindfold.png');
   }
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    this.props.form.validateFields((err: string, values: string) => {
+    this.props.form.validateFields((err: string, values: form): any => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        const type = login(values.username, values.password);
+        if (type === 1) return message.error('用户名不存在!');
+        else if (type === 2) return message.error('密码错误!');
+        console.log('Received values of form: ', type);
       }
     });
   };
@@ -48,7 +58,7 @@ class Login extends Component<propType, stateType> {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className='login_main'>
-        <img src={this.imageSource()} alt='登录图片' width="150" height="150" />
+        <img src={this.imageSource()} alt='登录图片' width='150' height='150' />
         <Form onSubmit={this.handleSubmit} className='login-form'>
           <Form.Item>
             {getFieldDecorator('username', {

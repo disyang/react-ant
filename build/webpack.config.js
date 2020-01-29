@@ -32,7 +32,8 @@ module.exports = {
       '@redux': resolve('../src/redux'),
       '@routers': resolve('../src/routers'),
       '@i18n': resolve('../src/i18n'),
-      '@hooks': resolve('../src/hooks')
+      '@hooks': resolve('../src/hooks'),
+      '@mocks': resolve('../src/mocks'),
     }
   },
   performance: {

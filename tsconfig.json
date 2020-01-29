@@ -21,7 +21,8 @@
       "@images/*": ["images/*"],
       "@routers/*": ["routers/*"],
       "@pages/*": ["pages/*"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@mocks/*": ["mocks/*"]
     },
     "lib": ["es6", "dom"],
     "allowJs": true,
