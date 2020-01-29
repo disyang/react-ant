@@ -1,16 +1,38 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import './login.less';
-const normal = require('@images/normal.png');
 
 interface propType {
   isLogin: boolean;
   form: any;
 }
 
-class Login extends Component<propType> {
+enum ImageType {
+  normal,
+  greet,
+  blind
+}
+
+interface stateType {
+  image: ImageType;
+}
+
+class Login extends Component<propType, stateType> {
   constructor(props: propType) {
     super(props);
+    this.state = {
+      image: ImageType.normal
+    };
+  }
+
+  private imageSource(): string {
+    const { image } = this.state;
+    if (image === ImageType.blind) {
+      return require('@images/blindfold.png');
+    } else if (image === ImageType.greet) {
+      return require('@images/greeting.png');
+    }
+    return require('@images/normal.png');
   }
 
   handleSubmit = (e: any) => {
@@ -25,8 +47,8 @@ class Login extends Component<propType> {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className="login_main">
-        <img src={normal} alt=""/>
+      <div className='login_main'>
+        <img src={this.imageSource()} alt='登录图片' width="150" height="150" />
         <Form onSubmit={this.handleSubmit} className='login-form'>
           <Form.Item>
             {getFieldDecorator('username', {
