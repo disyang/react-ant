@@ -1,45 +1,33 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 import './login.less';
-import { login } from '@mocks/login';
-
-interface propType {
-  isLogin: boolean;
-  form: any;
-}
-
-enum ImageType {
-  normal,
-  greet,
-  blind
-}
-
-interface stateType {
-  image: ImageType;
-}
+import { register } from '@mocks/login';
 
 interface form {
   username: string;
-  password: string;
-  remember: boolean;
+  passwordOne: string;
+  passwordTwo: string;
 }
 
-class Register extends Component<propType, stateType> {
-  constructor(props: propType) {
+class Register extends Component<any, any> {
+  constructor(props: any) {
     super(props);
-    this.state = {
-      image: ImageType.normal
-    };
   }
 
   handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: string, values: form): any => {
       if (!err) {
-        const type = login(values.username, values.password);
-        if (type === 1) return message.error('用户名不存在!');
-        else if (type === 2) return message.error('密码错误!');
-        console.log('Received values of form: ', type);
+        const type = register(
+          values.username,
+          values.passwordOne,
+          values.passwordTwo
+        );
+        if (type === 1) return message.error('密码不一致, 请修改!');
+        else {
+          this.props.history.push('/login');
+          return message.success('注册成功!')
+        }
       }
     });
   };
@@ -48,7 +36,12 @@ class Register extends Component<propType, stateType> {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className='login_main'>
-        <img src={require('@images/normal.png')} alt='登录图片' width='100' height='100' />
+        <img
+          src={require('@images/normal.png')}
+          alt='登录图片'
+          width='100'
+          height='100'
+        />
         <Form onSubmit={this.handleSubmit} className='login-form'>
           <Form.Item>
             {getFieldDecorator('username', {
@@ -59,7 +52,7 @@ class Register extends Component<propType, stateType> {
                   <Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />
                 }
                 allowClear
-                placeholder='用户名'
+                placeholder='请输入用户名'
               />
             )}
           </Form.Item>
@@ -73,7 +66,7 @@ class Register extends Component<propType, stateType> {
                 }
                 allowClear
                 type='password'
-                placeholder='密码'
+                placeholder='请输入密码'
               />
             )}
           </Form.Item>
@@ -87,7 +80,7 @@ class Register extends Component<propType, stateType> {
                 }
                 allowClear
                 type='password'
-                placeholder='确认密码'
+                placeholder='请确认密码'
               />
             )}
           </Form.Item>
