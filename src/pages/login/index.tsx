@@ -3,14 +3,11 @@ import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import './login.less';
 import { login } from '@mocks/login';
 import { Link } from 'react-router-dom';
-import { C } from '../../test';
 
 interface propType {
   isLogin: boolean;
   form: any;
 }
-
-console.log(new C().method('123'));
 
 enum ImageType {
   normal,

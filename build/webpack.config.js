@@ -149,7 +149,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: resolve('../public/index.html'),
       favicon: resolve('../public/favicon.ico'),
-      title: 'react-app',
+      title: 'ant-app',
       minify: {
         collapseWhitespace: true //删除空格、换行
       }
