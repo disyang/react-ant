@@ -34,6 +34,7 @@ module.exports = {
       '@i18n': resolve('../src/i18n'),
       '@hooks': resolve('../src/hooks'),
       '@mocks': resolve('../src/mocks'),
+      '@constants': resolve('../src/constants'),
     }
   },
   performance: {

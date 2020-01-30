@@ -22,7 +22,8 @@
       "@routers/*": ["routers/*"],
       "@pages/*": ["pages/*"],
       "@hooks/*": ["hooks/*"],
-      "@mocks/*": ["mocks/*"]
+      "@mocks/*": ["mocks/*"],
+      "@constants/*": ["constants/*"],
     },
     "lib": ["es6", "dom"],
     "allowJs": true,
