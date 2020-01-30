@@ -51,7 +51,7 @@ class Login extends Component<propType, stateType> {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className='login_main'>
-        <img src={require('@images/blindfold.png')} alt='登录图片' width='150' height='150' />
+        <img src={require('@images/blindfold.png')} alt='登录图片' width='100' height='100' />
         <Form onSubmit={this.handleSubmit} className='login-form'>
           <Form.Item>
             {getFieldDecorator('username', {
