@@ -3,11 +3,14 @@ import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import './login.less';
 import { login } from '@mocks/login';
 import { Link } from 'react-router-dom';
+import { C } from '../../test';
 
 interface propType {
   isLogin: boolean;
   form: any;
 }
+
+console.log(new C().method('123'));
 
 enum ImageType {
   normal,
@@ -51,7 +54,12 @@ class Login extends Component<propType, stateType> {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className='login_main'>
-        <img src={require('@images/blindfold.png')} alt='登录图片' width='100' height='100' />
+        <img
+          src={require('@images/blindfold.png')}
+          alt='登录图片'
+          width='100'
+          height='100'
+        />
         <Form onSubmit={this.handleSubmit} className='login-form'>
           <Form.Item>
             {getFieldDecorator('username', {
