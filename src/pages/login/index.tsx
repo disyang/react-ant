@@ -40,8 +40,7 @@ class Login extends Component<propType, stateType> {
     e.preventDefault();
     this.props.form.validateFields((err: string, values: form): any => {
       if (!err) {
-        console.log(this.props)
-        this.props.store.dispatch(addCount(1));
+        store.dispatch(addCount(1));
         const type = login(values.username, values.password);
         if (type === 1) return message.error('用户名不存在!');
         else if (type === 2) return message.error('密码错误!');

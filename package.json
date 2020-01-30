@@ -66,6 +66,7 @@
     "react-intl-universal": "^2.2.2",
     "react-router-dom": "^5.1.2",
     "redux": "^4.0.1",
+    "redux-chunk": "^1.0.11",
     "sinon": "~4.1.6",
     "socket.io": "2.0.4",
     "supervisor": "^0.12.0",
