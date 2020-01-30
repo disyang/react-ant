@@ -29,7 +29,7 @@ module.exports = {
       '@images': resolve('../src/images'),
       '@pages': resolve('../src/pages'),
       '@apis': resolve('../src/apis'),
-      '@redux': resolve('../src/redux'),
+      '@reduxs': resolve('../src/reduxs'),
       '@routers': resolve('../src/routers'),
       '@i18n': resolve('../src/i18n'),
       '@hooks': resolve('../src/hooks'),

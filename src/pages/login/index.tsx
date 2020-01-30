@@ -3,10 +3,13 @@ import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import './login.less';
 import { login } from '@mocks/login';
 import { Link } from 'react-router-dom';
+import store from '@reduxs/reducers/index';
+import { addCount } from '@reduxs/reducers/login';
 
 interface propType {
   isLogin: boolean;
   form: any;
+  store: any,
 }
 
 enum ImageType {
@@ -37,6 +40,8 @@ class Login extends Component<propType, stateType> {
     e.preventDefault();
     this.props.form.validateFields((err: string, values: form): any => {
       if (!err) {
+        console.log(this.props)
+        this.props.store.dispatch(addCount(1));
         const type = login(values.username, values.password);
         if (type === 1) return message.error('用户名不存在!');
         else if (type === 2) return message.error('密码错误!');
@@ -108,4 +113,4 @@ class Login extends Component<propType, stateType> {
   }
 }
 
-export default Form.create({ name: 'normal_login' })(Login);
+export default Form.create({ name: 'login' })(Login);

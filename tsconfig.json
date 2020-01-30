@@ -14,7 +14,7 @@
     "baseUrl": "./src",
     "paths": {
       "@components/*": ["components/*"],
-      "@redux/*": ["redux/*"],
+      "@reduxs/*": ["reduxs/*"],
       "@i18n/*": ["i18n/*"],
       "@api/*": ["api/*"],
       "@/*": ["*"],

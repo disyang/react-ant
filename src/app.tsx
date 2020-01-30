@@ -1,18 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 import Routes from '@routers/index';
-// import configure from '@middleware/configureStore'
+import store from '@reduxs/reducers';
 
 const HotRoutes = hot(Routes);
-// const store = configure({ })
 
-// ReactDOM.render(
-//   <Provider >
-//     <HotRoutes />
-//   </Provider>,
-//   document.getElementById('root')
-// );
-
-ReactDOM.render(<HotRoutes />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <HotRoutes />
+  </Provider>,
+  document.getElementById('root')
+);
