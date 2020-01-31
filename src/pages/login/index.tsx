@@ -3,10 +3,10 @@ import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
 import './login.less';
 import { login } from '@mocks/login';
 import { Link } from 'react-router-dom';
-import store from '@reduxs/reducers/index';
 import { addCount, addRemember } from '@reduxs/reducers/login';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { info } from '@reduxs/actions/actionType';
 
 interface propType {
   isLogin: boolean;
@@ -14,6 +14,8 @@ interface propType {
   store: any;
   addCount: Function;
   addRemember: Function;
+  loginCount: number;
+  remember: info;
 }
 
 enum ImageType {
@@ -24,8 +26,6 @@ enum ImageType {
 
 interface stateType {
   image: ImageType;
-  password: string;
-  username: string;
 }
 
 interface form {
@@ -38,40 +38,20 @@ class Login extends Component<propType, stateType> {
   constructor(props: propType, context: any) {
     super(props, context);
     this.state = {
-      image: ImageType.normal,
-      password: '',
-      username: ''
+      image: ImageType.normal
     };
-  }
-
-  componentWillMount() {
-    const { remember } = store.getState();
-    if (remember.remember) {
-      this.setState({
-        password: remember.password,
-        username: remember.username
-      });
-    }
-  }
-
-  componentDidMount() {
-    const { store } = this.context;
-    console.log(store, 12333);
   }
 
   handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: string, values: form): any => {
       if (!err) {
-        console.log(this.props.store);
-        store.dispatch(
-          this.props.addRemember({
-            remember: values.remember,
-            password: values.password,
-            username: values.username
-          })
-        );
-        store.dispatch(this.props.addCount(1));
+        this.props.addCount(1);
+        this.props.addRemember({
+          remember: values.remember,
+          password: values.password,
+          username: values.username
+        });
         const type = login(values.username, values.password);
         if (type === 1) return message.error('用户名不存在');
         else if (type === 2) return message.error('密码错误');
@@ -95,7 +75,7 @@ class Login extends Component<propType, stateType> {
         <Form onSubmit={this.handleSubmit} className='login-form'>
           <Form.Item>
             {getFieldDecorator('username', {
-              initialValue: this.state.username,
+              initialValue: this.props.remember.username,
               rules: [{ required: true, message: '请输入用户名' }]
             })(
               <Input
@@ -109,7 +89,7 @@ class Login extends Component<propType, stateType> {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('password', {
-              initialValue: this.state.password,
+              initialValue: this.props.remember.password,
               rules: [{ required: true, message: '请输入密码' }]
             })(
               <Input
@@ -147,12 +127,19 @@ class Login extends Component<propType, stateType> {
 
 const LoginForm = Form.create({ name: 'login' })(Login);
 
-export default connect(null, dispatch =>
-  bindActionCreators(
-    {
-      addCount,
-      addRemember
-    },
-    dispatch
-  )
+export default connect(
+  (state: any) => {
+    return {
+      loginCount: state.loginCount,
+      remember: state.remember
+    };
+  },
+  dispatch =>
+    bindActionCreators(
+      {
+        addCount,
+        addRemember
+      },
+      dispatch
+    )
 )(LoginForm);
