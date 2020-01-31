@@ -9,12 +9,23 @@ interface form {
   passwordTwo: string;
 }
 
-class Register extends Component<any, any> {
-  constructor(props: any) {
+interface propsType {
+  form: any;
+  history: any;
+}
+
+class Register extends Component<propsType, any> {
+  constructor(props: propsType) {
     super(props);
   }
 
+  back(e: any) {
+    e.preventDefault();
+    this.props.history.push('/login');
+  }
+
   handleSubmit = (e: any) => {
+    console.log(this.props)
     e.preventDefault();
     this.props.form.validateFields((err: string, values: form): any => {
       if (!err) {
@@ -26,7 +37,7 @@ class Register extends Component<any, any> {
         if (type === 1) return message.error('密码不一致, 请修改');
         else {
           this.props.history.push('/login');
-          return message.success('注册成功')
+          return message.success('注册成功');
         }
       }
     });
@@ -34,6 +45,7 @@ class Register extends Component<any, any> {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const back = this.back.bind(this);
     return (
       <div className='login_main'>
         <img
@@ -92,6 +104,9 @@ class Register extends Component<any, any> {
             >
               注册
             </Button>
+          </Form.Item>
+          <Form.Item>
+            <Icon type='left-circle' onClick={back} className='login_icon' />
           </Form.Item>
         </Form>
       </div>

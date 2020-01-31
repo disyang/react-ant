@@ -35,8 +35,8 @@ interface form {
 }
 
 class Login extends Component<propType, stateType> {
-  constructor(props: propType, context: any) {
-    super(props, context);
+  constructor(props: propType) {
+    super(props);
     this.state = {
       image: ImageType.normal
     };
