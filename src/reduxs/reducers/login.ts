@@ -1,8 +1,13 @@
-import { LoginCount } from '../actions/actionType';
-import { LOGIN_COUNT } from '@constants/index';
+import { LoginCount, InfoRem, info } from '../actions/actionType';
+import { LOGIN_COUNT, REM } from '@constants/index';
 
 const initState = {
-  loginCount: 0
+  loginCount: 0,
+  infoRem: {
+    remember: false,
+    password: '',
+    username: ''
+  }
 };
 
 export function loginCount(
@@ -21,5 +26,21 @@ export function addCount(n: number): LoginCount {
   return {
     type: LOGIN_COUNT,
     loginCount: n
+  };
+}
+
+export function remember(state = initState.infoRem, action: InfoRem): info {
+  switch (action.type) {
+    case REM:
+      return action.info;
+    default:
+      return state;
+  }
+}
+
+export function addRemember(n: info): InfoRem {
+  return {
+    type: REM,
+    info: n
   };
 }

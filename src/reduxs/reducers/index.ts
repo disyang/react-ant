@@ -1,10 +1,11 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
-import { loginCount } from './login';
+import { loginCount, remember } from './login';
 import thunk from 'redux-thunk';
 
 const store = createStore(
   combineReducers({
-    loginCount
+    loginCount,
+    remember
   }),
   compose(applyMiddleware(thunk))
 );

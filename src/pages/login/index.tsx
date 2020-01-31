@@ -4,12 +4,12 @@ import './login.less';
 import { login } from '@mocks/login';
 import { Link } from 'react-router-dom';
 import store from '@reduxs/reducers/index';
-import { addCount } from '@reduxs/reducers/login';
+import { addCount, addRemember } from '@reduxs/reducers/login';
 
 interface propType {
   isLogin: boolean;
   form: any;
-  store: any,
+  store: any;
 }
 
 enum ImageType {
@@ -20,6 +20,8 @@ enum ImageType {
 
 interface stateType {
   image: ImageType;
+  password: string;
+  username: string;
 }
 
 interface form {
@@ -29,17 +31,36 @@ interface form {
 }
 
 class Login extends Component<propType, stateType> {
-  constructor(props: propType) {
-    super(props);
+  constructor(props: propType, context: any) {
+    super(props, context);
     this.state = {
-      image: ImageType.normal
+      image: ImageType.normal,
+      password: '',
+      username: ''
     };
+  }
+
+  componentWillMount() {
+    const { remember } = store.getState();
+    if (remember.remember) {
+      this.setState({
+        password: remember.password,
+        username: remember.username
+      });
+    }
   }
 
   handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: string, values: form): any => {
       if (!err) {
+        store.dispatch(
+          addRemember({
+            remember: values.remember,
+            password: values.password,
+            username: values.username
+          })
+        );
         store.dispatch(addCount(1));
         const type = login(values.username, values.password);
         if (type === 1) return message.error('用户名不存在!');
@@ -64,6 +85,7 @@ class Login extends Component<propType, stateType> {
         <Form onSubmit={this.handleSubmit} className='login-form'>
           <Form.Item>
             {getFieldDecorator('username', {
+              initialValue: this.state.username,
               rules: [{ required: true, message: '请输入用户名!' }]
             })(
               <Input
@@ -77,6 +99,7 @@ class Login extends Component<propType, stateType> {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('password', {
+              initialValue: this.state.password,
               rules: [{ required: true, message: '请输入密码!' }]
             })(
               <Input
