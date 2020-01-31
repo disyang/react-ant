@@ -64,6 +64,7 @@ class Login extends Component<propType, stateType> {
 
   render() {
     const { getFieldDecorator } = this.props.form;
+    const flag = this.props.remember.remember;
     return (
       <div className='login_main'>
         <img
@@ -75,7 +76,7 @@ class Login extends Component<propType, stateType> {
         <Form onSubmit={this.handleSubmit} className='login-form'>
           <Form.Item>
             {getFieldDecorator('username', {
-              initialValue: this.props.remember.username,
+              initialValue: flag ? this.props.remember.username : '',
               rules: [{ required: true, message: '请输入用户名' }]
             })(
               <Input
@@ -89,7 +90,7 @@ class Login extends Component<propType, stateType> {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('password', {
-              initialValue: this.props.remember.password,
+              initialValue: flag ? this.props.remember.password : '',
               rules: [{ required: true, message: '请输入密码' }]
             })(
               <Input
