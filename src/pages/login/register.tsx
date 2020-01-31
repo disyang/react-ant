@@ -106,7 +106,7 @@ class Register extends Component<propsType, any> {
             </Button>
           </Form.Item>
           <Form.Item>
-            <Icon type='left-circle' onClick={back} className='login_icon' />
+            <Icon title="返回" type='left-circle' onClick={back} className='login_icon' />
           </Form.Item>
         </Form>
       </div>
