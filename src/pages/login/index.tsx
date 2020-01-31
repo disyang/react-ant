@@ -63,10 +63,10 @@ class Login extends Component<propType, stateType> {
         );
         store.dispatch(addCount(1));
         const type = login(values.username, values.password);
-        if (type === 1) return message.error('用户名不存在!');
-        else if (type === 2) return message.error('密码错误!');
+        if (type === 1) return message.error('用户名不存在');
+        else if (type === 2) return message.error('密码错误');
         else {
-          return message.success('登录成功!');
+          return message.success('登录成功');
         }
       }
     });
@@ -86,7 +86,7 @@ class Login extends Component<propType, stateType> {
           <Form.Item>
             {getFieldDecorator('username', {
               initialValue: this.state.username,
-              rules: [{ required: true, message: '请输入用户名!' }]
+              rules: [{ required: true, message: '请输入用户名' }]
             })(
               <Input
                 prefix={
@@ -100,7 +100,7 @@ class Login extends Component<propType, stateType> {
           <Form.Item>
             {getFieldDecorator('password', {
               initialValue: this.state.password,
-              rules: [{ required: true, message: '请输入密码!' }]
+              rules: [{ required: true, message: '请输入密码' }]
             })(
               <Input
                 prefix={
