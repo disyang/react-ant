@@ -14,7 +14,7 @@ function resolve(r) {
 
 module.exports = {
   entry: {
-    app: resolve('../src/app.tsx')
+    app: resolve('../src/App.tsx')
   },
   output: {
     filename: `js/[name].[${devMode ? 'hash' : 'contenthash'}:8].js`,

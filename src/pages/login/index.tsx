@@ -5,11 +5,15 @@ import { login } from '@mocks/login';
 import { Link } from 'react-router-dom';
 import store from '@reduxs/reducers/index';
 import { addCount, addRemember } from '@reduxs/reducers/login';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 interface propType {
   isLogin: boolean;
   form: any;
   store: any;
+  addCount: Function;
+  addRemember: Function;
 }
 
 enum ImageType {
@@ -50,18 +54,24 @@ class Login extends Component<propType, stateType> {
     }
   }
 
+  componentDidMount() {
+    const { store } = this.context;
+    console.log(store, 12333);
+  }
+
   handleSubmit = (e: any) => {
     e.preventDefault();
     this.props.form.validateFields((err: string, values: form): any => {
       if (!err) {
+        console.log(this.props.store);
         store.dispatch(
-          addRemember({
+          this.props.addRemember({
             remember: values.remember,
             password: values.password,
             username: values.username
           })
         );
-        store.dispatch(addCount(1));
+        store.dispatch(this.props.addCount(1));
         const type = login(values.username, values.password);
         if (type === 1) return message.error('用户名不存在');
         else if (type === 2) return message.error('密码错误');
@@ -135,4 +145,14 @@ class Login extends Component<propType, stateType> {
   }
 }
 
-export default Form.create({ name: 'login' })(Login);
+const LoginForm = Form.create({ name: 'login' })(Login);
+
+export default connect(null, dispatch =>
+  bindActionCreators(
+    {
+      addCount,
+      addRemember
+    },
+    dispatch
+  )
+)(LoginForm);
