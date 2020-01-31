@@ -23,10 +23,10 @@ class Register extends Component<any, any> {
           values.passwordOne,
           values.passwordTwo
         );
-        if (type === 1) return message.error('密码不一致, 请修改!');
+        if (type === 1) return message.error('密码不一致, 请修改');
         else {
           this.props.history.push('/login');
-          return message.success('注册成功!')
+          return message.success('注册成功')
         }
       }
     });
@@ -45,7 +45,7 @@ class Register extends Component<any, any> {
         <Form onSubmit={this.handleSubmit} className='login-form'>
           <Form.Item>
             {getFieldDecorator('username', {
-              rules: [{ required: true, message: '请输入用户名!' }]
+              rules: [{ required: true, message: '请输入用户名' }]
             })(
               <Input
                 prefix={
@@ -58,7 +58,7 @@ class Register extends Component<any, any> {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('passwordOne', {
-              rules: [{ required: true, message: '请输入密码!' }]
+              rules: [{ required: true, message: '请输入密码' }]
             })(
               <Input
                 prefix={
@@ -72,7 +72,7 @@ class Register extends Component<any, any> {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('passwordTwo', {
-              rules: [{ required: true, message: '请确认密码!' }]
+              rules: [{ required: true, message: '请确认密码' }]
             })(
               <Input
                 prefix={
