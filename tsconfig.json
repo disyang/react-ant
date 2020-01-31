@@ -17,7 +17,6 @@
       "@reduxs/*": ["reduxs/*"],
       "@i18n/*": ["i18n/*"],
       "@api/*": ["api/*"],
-      "@/*": ["*"],
       "@images/*": ["images/*"],
       "@routers/*": ["routers/*"],
       "@pages/*": ["pages/*"],
