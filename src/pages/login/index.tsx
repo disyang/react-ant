@@ -58,9 +58,8 @@ class Login extends Component<propType, stateType> {
         if (type === 1) return message.error('用户名不存在');
         else if (type === 2) return message.error('密码错误');
         else {
-          console.log(values)
           const history = createHashHistory();
-          history.push('/home/123')
+          history.push(`/home/${values.username}`);
           return message.success('登录成功');
         }
       }

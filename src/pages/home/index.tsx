@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 import Head from '../head';
 import './home.less';
+import { createHashHistory } from 'history';
 
 const { SubMenu } = Menu;
 
@@ -17,10 +18,10 @@ export default class Home extends Component<propsType, stateType> {
     this.state = {
       current: 'mail'
     };
+    console.log(this.props);
   }
 
   handleClick = (e: any) => {
-    console.log('click ', e);
     this.setState({
       current: e.key
     });
