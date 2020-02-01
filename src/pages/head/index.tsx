@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './head.less';
-import { Input, Avatar, Icon } from 'antd';
+import { Input, Avatar } from 'antd';
 
 interface propsType {
   username: string;
@@ -54,13 +54,15 @@ export default class Home extends Component<propsType, stateType> {
   render() {
     return (
       <div className='head'>
-        <ul className='head_ul'>
-          {title.map(val => (
-            <li key={val.id}>{val.name}</li>
-          ))}
-        </ul>
-        <Input placeholder='关键词搜索' />
-        <Avatar>USER</Avatar>
+        <div className='head_main'>
+          <ul className='head_ul'>
+            {title.map(val => (
+              <li key={val.id}>{val.name}</li>
+            ))}
+          </ul>
+          <Input placeholder='关键词搜索' />
+          <Avatar>USER</Avatar>
+        </div>
       </div>
     );
   }
