@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
 import Head from '../head';
 import './home.less';
-import { createHashHistory } from 'history';
 
 const { SubMenu } = Menu;
 
