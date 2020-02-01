@@ -7,6 +7,8 @@ import { addCount, addRemember } from '@reduxs/reducers/login';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { info } from '@reduxs/actions/actionType';
+import { createHashHistory } from 'history';
+
 
 interface propType {
   isLogin: boolean;
@@ -16,7 +18,6 @@ interface propType {
   addRemember: Function;
   loginCount: number;
   remember: info;
-  history: any;
 }
 
 enum ImageType {
@@ -57,7 +58,9 @@ class Login extends Component<propType, stateType> {
         if (type === 1) return message.error('用户名不存在');
         else if (type === 2) return message.error('密码错误');
         else {
-          this.props.history.push(`/home/${values.username}`)
+          console.log(values)
+          const history = createHashHistory();
+          history.push('/home/123')
           return message.success('登录成功');
         }
       }

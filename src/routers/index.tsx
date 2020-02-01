@@ -1,16 +1,50 @@
-import * as React from 'react';
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Register from '@pages/login/register'; // 注册
-import Login from '@pages/login'; // 登录
-import Home from '@pages/home'; // 登录
+import React, { Suspense } from 'react';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-export default () => (
-  <HashRouter>
+import LoadingPage from '@components/LoadingPage';
+import config from './config';
+import { routerConfig } from './config'
+
+const renderRoutes = (routes: Array<routerConfig>) => {
+
+  return (
     <Switch>
-      <Redirect from='/' to='/login' exact></Redirect>
-      <Route path='/login' component={Login} />
-      <Route path='/register' component={Register} />
-      <Route path='/home/:username' component={Home} />
+      {routes.map((route, index) => {
+        if (route.redirect) {
+          return (
+            <Redirect
+              key={route.path || index}
+              exact={route.exact}
+              from={route.path}
+              to={route.redirect}
+            />
+          );
+        }
+        return (
+          <Route
+            key={route.path || index}
+            path={route.path}
+            exact={route.exact}
+            render={() => {
+              const renderChildRoutes = renderRoutes(route.childRoutes || []);
+              if (route.component) {
+                return (
+                  <Suspense fallback={<LoadingPage />}>
+                    <route.component route={route}>{renderChildRoutes}</route.component>
+                  </Suspense>
+                );
+              }
+              return renderChildRoutes;
+            }}
+          />
+        );
+      })}
     </Switch>
-  </HashRouter>
-);
+  );
+};
+
+const AppRouter = () => {
+  return <Router>{renderRoutes(config)}</Router>;
+};
+
+export default AppRouter;

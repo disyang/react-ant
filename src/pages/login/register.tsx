@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form, Icon, Input, Button, message } from 'antd';
 import './login.less';
 import { register } from '@mocks/login';
+import { createHashHistory } from 'history';
 
 interface form {
   username: string;
@@ -21,11 +22,12 @@ class Register extends Component<propsType, any> {
 
   back(e: any) {
     e.preventDefault();
-    this.props.history.push('/login');
+    const history = createHashHistory();
+    history.push('/login');
   }
 
   handleSubmit = (e: any) => {
-    console.log(this.props)
+    console.log(this.props);
     e.preventDefault();
     this.props.form.validateFields((err: string, values: form): any => {
       if (!err) {
@@ -36,7 +38,8 @@ class Register extends Component<propsType, any> {
         );
         if (type === 1) return message.error('密码不一致, 请修改');
         else {
-          this.props.history.push('/login');
+          const history = createHashHistory();
+          history.push('/login');
           return message.success('注册成功');
         }
       }
@@ -45,7 +48,7 @@ class Register extends Component<propsType, any> {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const back = this.back.bind(this);
+    const { back } = this;
     return (
       <div className='login_main'>
         <img
@@ -106,7 +109,12 @@ class Register extends Component<propsType, any> {
             </Button>
           </Form.Item>
           <Form.Item>
-            <Icon title="返回" type='left-circle' onClick={back} className='login_icon' />
+            <Icon
+              title='返回'
+              type='left-circle'
+              onClick={back}
+              className='login_icon'
+            />
           </Form.Item>
         </Form>
       </div>
