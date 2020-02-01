@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'antd';
-import './home.less'
+import Head from '../head';
+import './home.less';
 
 const { SubMenu } = Menu;
 
@@ -27,7 +28,8 @@ export default class Home extends Component<propsType, stateType> {
 
   render() {
     return (
-      <div className="home">
+      <div className='main'>
+        <Head username='123'></Head>
         <Menu
           onClick={this.handleClick}
           selectedKeys={[this.state.current]}
