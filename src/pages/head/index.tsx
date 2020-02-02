@@ -49,6 +49,7 @@ const title: titleConfig[] = [
 export default class Home extends Component<propsType, stateType> {
   constructor(props: propsType) {
     super(props);
+    console.log(this.props);
   }
 
   render() {

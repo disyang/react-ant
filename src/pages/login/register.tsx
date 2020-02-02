@@ -51,13 +51,8 @@ class Register extends Component<propsType, any> {
     const { back } = this;
     return (
       <div className='login_main'>
-        <img
-          src={require('@images/normal.png')}
-          alt='登录图片'
-          width='100'
-          height='100'
-        />
         <Form onSubmit={this.handleSubmit} className='login-form'>
+        <div className="login-title">欢迎注册 服务管理平台</div>
           <Form.Item>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: '请输入用户名' }]

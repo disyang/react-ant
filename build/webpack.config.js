@@ -1,5 +1,4 @@
 const path = require('path');
-const devMode = process.env.NODE_ENV !== 'production';
 const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -17,9 +16,9 @@ module.exports = {
     app: resolve('../src/App.tsx')
   },
   output: {
-    filename: `js/[name].[${devMode ? 'hash' : 'contenthash'}:8].js`,
+    filename: 'js/[name].[hash:8].js',
     path: resolve('../dist'),
-    chunkFilename: `chunks/[name].[${devMode ? 'hash' : 'contenthash'}:8].js`
+    chunkFilename: 'chunks/[name].[hash:8].js'
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
@@ -56,13 +55,7 @@ module.exports = {
       {
         test: /\.(css|less)$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: devMode,
-              reloadAll: devMode
-            }
-          },
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'less-loader'
@@ -81,7 +74,7 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: 'img/[name].[hash:8].[ext]'
+                  name: 'img/[name].[ext]'
                 }
               }
             }
@@ -98,7 +91,7 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: 'media/[name].[hash:8].[ext]'
+                  name: 'media/[name].[contenthash].[ext]'
                 }
               }
             }
@@ -115,7 +108,7 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: 'fonts/[name].[hash:8].[ext]'
+                  name: 'fonts/[name].[contenthash].[ext]'
                 }
               }
             }
@@ -127,10 +120,8 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: devMode ? 'css/style.css' : 'css/style.[contenthash].css',
-      chunkFilename: devMode
-        ? 'css/style.[id].css'
-        : 'css/style.[contenthash].[id].css'
+      filename: 'style.[contenthash:8].css',
+      chunkFilename: 'chunks/style.[contenthash:8].[id].css',
     }),
     new HappyPack({
       id: 'happyBabel',

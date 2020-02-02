@@ -71,13 +71,8 @@ class Login extends Component<propType, stateType> {
     const flag = this.props.remember.remember;
     return (
       <div className='login_main'>
-        <img
-          src={require('@images/blindfold.png')}
-          alt='登录图片'
-          width='100'
-          height='100'
-        />
         <Form onSubmit={this.handleSubmit} className='login-form'>
+        <div className="login-title">欢迎登录 服务管理平台</div>
           <Form.Item>
             {getFieldDecorator('username', {
               initialValue: flag ? this.props.remember.username : '',
