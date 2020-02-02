@@ -1,76 +1,60 @@
+import { Layout, Menu, Icon, Row } from 'antd';
 import React, { Component } from 'react';
-import { Menu, Icon } from 'antd';
-import Head from '../head';
+// import { Link } from 'react-router-dom';
 import './home.less';
 
-const { SubMenu } = Menu;
+const { Header, Sider, Content } = Layout;
 
-interface propsType {}
+export default class SiderDemo extends Component {
+  state = {
+    collapsed: false
+  };
 
-interface stateType {
-  current: string;
-}
-
-export default class Home extends Component<propsType, stateType> {
-  constructor(props: propsType) {
-    super(props);
-    this.state = {
-      current: 'mail'
-    };
-    console.log(this.props);
-  }
-
-  handleClick = (e: any) => {
+  toggle = () => {
     this.setState({
-      current: e.key
+      collapsed: !this.state.collapsed
     });
   };
 
   render() {
     return (
-      <div className='main'>
-        <Head username='123'></Head>
-        <Menu
-          onClick={this.handleClick}
-          selectedKeys={[this.state.current]}
-          mode='horizontal'
-        >
-          <Menu.Item key='mail'>
-            <Icon type='mail' />
-            Navigation One
-          </Menu.Item>
-          <Menu.Item key='app' disabled>
-            <Icon type='appstore' />
-            Navigation Two
-          </Menu.Item>
-          <SubMenu
-            title={
-              <span className='submenu-title-wrapper'>
-                <Icon type='setting' />
-                Navigation Three - Submenu
-              </span>
-            }
+      <Layout>
+        <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+          <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
+            <Menu.Item key='1'>
+              <Icon type='user' />
+              <span>nav 1</span>
+            </Menu.Item>
+            <Menu.Item key='2'>
+              <Icon type='video-camera' />
+              <span>nav 2</span>
+            </Menu.Item>
+            <Menu.Item key='3'>
+              <Icon type='upload' />
+              <span>nav 3</span>
+            </Menu.Item>
+          </Menu>
+        </Sider>
+        <Layout>
+          <Header style={{ background: '#fff', padding: 0 }}>
+            <Icon
+              className='trigger'
+              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={this.toggle}
+            />
+          </Header>
+          <Content
+            style={{
+              margin: '24px 16px',
+              padding: 24,
+              background: '#fff',
+              minHeight: 280
+            }}
           >
-            <Menu.ItemGroup title='Item 1'>
-              <Menu.Item key='setting:1'>Option 1</Menu.Item>
-              <Menu.Item key='setting:2'>Option 2</Menu.Item>
-            </Menu.ItemGroup>
-            <Menu.ItemGroup title='Item 2'>
-              <Menu.Item key='setting:3'>Option 3</Menu.Item>
-              <Menu.Item key='setting:4'>Option 4</Menu.Item>
-            </Menu.ItemGroup>
-          </SubMenu>
-          <Menu.Item key='alipay'>
-            <a
-              href='https://ant.design'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              Navigation Four - Link
-            </a>
-          </Menu.Item>
-        </Menu>
-      </div>
+            Content
+          </Content>
+        </Layout>
+      </Layout>
     );
   }
 }
