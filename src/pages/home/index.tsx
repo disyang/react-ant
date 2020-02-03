@@ -15,7 +15,6 @@ interface stateType {
 export default class SiderDemo extends Component<any, stateType> {
   constructor(props: any) {
     super(props);
-    console.log(this.props);
     this.state = {
       collapsed: false,
       index: 0
