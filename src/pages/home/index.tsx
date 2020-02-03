@@ -1,18 +1,34 @@
-import { Layout, Menu, Icon, Avatar, Dropdown } from 'antd';
+import { Layout, Menu, Icon, Avatar, Dropdown, Input } from 'antd';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Eform from '@pages/form';
 import './home.less';
 
 const { Header, Sider, Content } = Layout;
 
-export default class SiderDemo extends Component {
-  state = {
-    collapsed: false
-  };
+interface stateType {
+  collapsed: boolean;
+  index: number;
+}
+
+export default class SiderDemo extends Component<any, stateType> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      collapsed: false,
+      index: 0
+    };
+  }
 
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed
+    });
+  };
+
+  setIndex = (e: any): void => {
+    this.setState({
+      index: +e.key
     });
   };
 
@@ -54,7 +70,7 @@ export default class SiderDemo extends Component {
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
           <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
             {siderList.map((v, index) => (
-              <Menu.Item key={index}>
+              <Menu.Item onClick={this.setIndex} key={index}>
                 <Icon type={v.icon} />
                 <span>{v.span}</span>
               </Menu.Item>
@@ -63,11 +79,17 @@ export default class SiderDemo extends Component {
         </Sider>
         <Layout>
           <Header className='login_head'>
-            <Icon
-              className='trigger'
-              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
-              onClick={this.toggle}
-            />
+            <section>
+              <Icon
+                className='trigger'
+                type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+                onClick={this.toggle}
+              />
+              &nbsp;
+              <span style={{ verticalAlign: '1px' }}>
+                {siderList[this.state.index].span}
+              </span>
+            </section>
             <Dropdown
               overlay={menu}
               trigger={['click', 'hover']}
@@ -92,7 +114,7 @@ export default class SiderDemo extends Component {
               minHeight: 280
             }}
           >
-            Content
+            <Eform></Eform>
           </Content>
         </Layout>
       </Layout>
