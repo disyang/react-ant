@@ -1,7 +1,7 @@
 import { Layout, Menu, Icon, Avatar, Dropdown, Input } from 'antd';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Eform from '@pages/form';
+import Eform from '@pages/user';
 import './home.less';
 
 const { Header, Sider, Content } = Layout;
@@ -14,7 +14,7 @@ interface stateType {
 export default class SiderDemo extends Component<any, stateType> {
   constructor(props: any) {
     super(props);
-    console.log(this.props)
+    console.log(this.props);
     this.state = {
       collapsed: false,
       index: 0
@@ -54,6 +54,10 @@ export default class SiderDemo extends Component<any, stateType> {
       {
         icon: 'fund',
         span: '图表管理'
+      },
+      {
+        icon: 'message',
+        span: '发表评论'
       }
     ];
     const menu = (
@@ -66,6 +70,10 @@ export default class SiderDemo extends Component<any, stateType> {
         </Menu.Item>
       </Menu>
     );
+    const cb = (index: number) => {
+      if (index === 0) return <Eform />;
+      else return 'none';
+    };
     return (
       <Layout className='layout_head'>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
@@ -90,6 +98,7 @@ export default class SiderDemo extends Component<any, stateType> {
               <span style={{ verticalAlign: '1px' }}>
                 {siderList[this.state.index].span}
               </span>
+              <Icon style={{verticalAlign: '-1px',}} type='caret-right' />
             </section>
             <Dropdown
               overlay={menu}
@@ -103,7 +112,9 @@ export default class SiderDemo extends Component<any, stateType> {
                   icon='user'
                 />
                 &nbsp;&nbsp;
-            <span style={{ fontSize: '18px' }}>{this.props.match.params.username}</span>
+                <span style={{ fontSize: '18px' }}>
+                  {this.props.match.params.username}
+                </span>
               </section>
             </Dropdown>
           </Header>
@@ -115,7 +126,7 @@ export default class SiderDemo extends Component<any, stateType> {
               minHeight: 280
             }}
           >
-            <Eform></Eform>
+            {cb(this.state.index)}
           </Content>
         </Layout>
       </Layout>
