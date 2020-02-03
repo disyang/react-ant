@@ -14,6 +14,7 @@ interface stateType {
 export default class SiderDemo extends Component<any, stateType> {
   constructor(props: any) {
     super(props);
+    console.log(this.props)
     this.state = {
       collapsed: false,
       index: 0
@@ -102,7 +103,7 @@ export default class SiderDemo extends Component<any, stateType> {
                   icon='user'
                 />
                 &nbsp;&nbsp;
-                <span style={{ fontSize: '20px' }}>123</span>
+            <span style={{ fontSize: '18px' }}>{this.props.match.params.username}</span>
               </section>
             </Dropdown>
           </Header>
