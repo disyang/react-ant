@@ -17,3 +17,17 @@ export interface InfoRem {
   type: constants.REM;
   info: info;
 }
+
+// 评论
+export interface Momment {
+  author: string;
+  avatar: string;
+  content: string;
+  datetime: string;
+}
+
+// 保存评论
+export interface addComment {
+  type: constants.COMMENT;
+  momment: Momment;
+}

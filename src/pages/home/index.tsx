@@ -2,6 +2,7 @@ import { Layout, Menu, Icon, Avatar, Dropdown, Input } from 'antd';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Eform from '@pages/user';
+import Comment from '@pages/comment';
 import './home.less';
 
 const { Header, Sider, Content } = Layout;
@@ -72,6 +73,8 @@ export default class SiderDemo extends Component<any, stateType> {
     );
     const cb = (index: number) => {
       if (index === 0) return <Eform />;
+      else if (index === 5)
+        return <Comment login={this.props.match.params.username} />;
       else return 'none';
     };
     return (
@@ -98,7 +101,7 @@ export default class SiderDemo extends Component<any, stateType> {
               <span style={{ verticalAlign: '1px' }}>
                 {siderList[this.state.index].span}
               </span>
-              <Icon style={{verticalAlign: '-1px',}} type='caret-right' />
+              <Icon style={{ verticalAlign: '-1px' }} type='caret-right' />
             </section>
             <Dropdown
               overlay={menu}
@@ -113,21 +116,12 @@ export default class SiderDemo extends Component<any, stateType> {
                 />
                 &nbsp;&nbsp;
                 <span style={{ fontSize: '18px' }}>
-                  {this.props.match.params.username}
+                  {this.props.match.params.username || '游客'}
                 </span>
               </section>
             </Dropdown>
           </Header>
-          <Content
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              background: '#fff',
-              minHeight: 280
-            }}
-          >
-            {cb(this.state.index)}
-          </Content>
+          <Content className='content_main'>{cb(this.state.index)}</Content>
         </Layout>
       </Layout>
     );

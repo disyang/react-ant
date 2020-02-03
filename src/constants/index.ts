@@ -9,3 +9,7 @@ export type LOGIN_COUNT = typeof LOGIN_COUNT;
 // 记录账号和密码
 export const REM = 'login_r';
 export type REM = typeof REM;
+
+// 评论
+export const COMMENT = 'COMMENT';
+export type COMMENT = typeof COMMENT;
