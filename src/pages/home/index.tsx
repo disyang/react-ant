@@ -69,7 +69,7 @@ export default class SiderDemo extends Component<any, stateType> {
     return (
       <Layout className='layout_head'>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
-          <Menu theme='dark' mode='inline' defaultSelectedKeys={['1']}>
+          <Menu theme='dark' mode='inline' defaultSelectedKeys={['0']}>
             {siderList.map((v, index) => (
               <Menu.Item onClick={this.setIndex} key={index}>
                 <Icon type={v.icon} />
