@@ -55,7 +55,7 @@ class App extends React.Component<any, any> {
         author: this.props.login || '游客',
         avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
         content: <p>{this.state.value}</p>,
-        datetime: moment().fromNow()
+        datetime: moment().format('YYYY-MM-DD HH:mm:ss'),
       });
       this.setState({
         submitting: false,
