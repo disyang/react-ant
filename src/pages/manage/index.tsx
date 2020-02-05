@@ -66,7 +66,6 @@ class ManageInfo extends Component<propsType, stateType> {
         title: '姓名',
         dataIndex: 'name',
         key: 'name',
-        render: (text: string) => <a>{text}</a>
       },
       {
         title: '年龄',
