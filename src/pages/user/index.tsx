@@ -21,7 +21,7 @@ class RegistrationForm extends Component<propsType, stateType> {
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    this.props.form.validateFieldsAndScroll((err: string, values: string) => {
+    this.props.form.validateFieldsAndScroll((err: string, values: object) => {
       if (!err) {
         console.log('Received values of form: ', values);
       }
@@ -34,7 +34,7 @@ class RegistrationForm extends Component<propsType, stateType> {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 }
+        sm: { span: 4 }
       },
       wrapperCol: {
         xs: { span: 24 },
@@ -44,12 +44,12 @@ class RegistrationForm extends Component<propsType, stateType> {
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
-          span: 24,
+          span: 12,
           offset: 0
         },
         sm: {
-          span: 16,
-          offset: 8
+          span: 8,
+          offset: 4
         }
       }
     };

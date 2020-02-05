@@ -13,3 +13,16 @@ export type REM = typeof REM;
 // 评论
 export const COMMENT = 'COMMENT';
 export type COMMENT = typeof COMMENT;
+
+// 管理数据
+export const MANAGE = 'MANAGE';
+export type MANAGE = typeof MANAGE;
+// 增加
+export const ADD = 'ADD';
+export type ADD = typeof ADD;
+// 修改
+export const EDIT = 'EDIT';
+export type EDIT = typeof EDIT;
+// 删除
+export const DEL = 'DEL';
+export type DEL = typeof DEL;

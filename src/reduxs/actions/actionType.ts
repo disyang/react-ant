@@ -31,3 +31,18 @@ export interface addComment {
   type: constants.COMMENT;
   momment: Momment;
 }
+
+// 新增表单
+export interface Manage {
+  key: string;
+  name: string;
+  age: number;
+  time: string;
+  address: string;
+  tags: Array<string>;
+}
+
+export interface addManage {
+  type: constants.ADD | constants.DEL | constants.EDIT;
+  manage: Manage;
+}

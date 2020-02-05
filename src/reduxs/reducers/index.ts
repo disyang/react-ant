@@ -1,6 +1,7 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { loginCount, remember } from './login';
 import { comment } from './commment';
+import { manage } from './manage';
 import thunk from 'redux-thunk';
 
 const store = createStore(
@@ -8,6 +9,7 @@ const store = createStore(
     loginCount,
     remember,
     comment,
+    manage,
   }),
   compose(applyMiddleware(thunk))
 );

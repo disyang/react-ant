@@ -1,9 +1,10 @@
-import { Layout, Menu, Icon, Avatar, Dropdown, Input } from 'antd';
+import { Layout, Menu, Icon, Avatar, Dropdown } from 'antd';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Eform from '@pages/user';
 import Comment from '@pages/comment';
 import './home.less';
+import Manage from '@pages/manage'
 
 const { Header, Sider, Content } = Layout;
 
@@ -72,6 +73,7 @@ export default class SiderDemo extends Component<any, stateType> {
     );
     const cb = (index: number) => {
       if (index === 0) return <Eform />;
+      else if (index === 2) return <Manage />
       else if (index === 5)
         return <Comment login={this.props.match.params.username} />;
       else return 'none';
