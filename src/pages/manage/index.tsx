@@ -32,8 +32,13 @@ class ManageInfo extends Component<propsType, stateType> {
   constructor(props: propsType) {
     super(props);
     this.state = {
-      visible: false,
+      visible: false
     };
+  }
+
+  open() {
+    this.props.form.resetFields();
+    this.setState({ visible: true });
   }
 
   handleOk(e: any) {
@@ -49,7 +54,7 @@ class ManageInfo extends Component<propsType, stateType> {
           tags: (values.tags || '').split(/[,，]+/)
         });
         this.setState({
-          visible: false,
+          visible: false
         });
       }
     });
@@ -112,6 +117,7 @@ class ManageInfo extends Component<propsType, stateType> {
     ];
     const { getFieldDecorator } = this.props.form;
     const handleOk = this.handleOk.bind(this);
+    const open = this.open.bind(this);
 
     return (
       <div className='login_man'>
@@ -124,11 +130,7 @@ class ManageInfo extends Component<propsType, stateType> {
           </Button>
         </header>
         <main>
-          <Button
-            onClick={() => this.setState({ visible: true })}
-            style={{ margin: '20px 0' }}
-            type='primary'
-          >
+          <Button onClick={open} style={{ margin: '20px 0' }} type='primary'>
             新建
           </Button>
           <Table columns={columns} dataSource={this.props.manage} />
@@ -153,7 +155,7 @@ class ManageInfo extends Component<propsType, stateType> {
                       message: '请输入姓名'
                     }
                   ]
-                })(<Input />)}
+                })(<Input allowClear placeholder='请输入姓名' />)}
               </Form.Item>
               <Form.Item label='年龄'>
                 {getFieldDecorator('age', {
@@ -163,23 +165,21 @@ class ManageInfo extends Component<propsType, stateType> {
                       message: '请输入年龄'
                     }
                   ]
-                })(<Input />)}
+                })(<Input allowClear placeholder='请输入年龄' />)}
               </Form.Item>
               <Form.Item label='地址'>
-                {getFieldDecorator('address')(<Input />)}
+                {getFieldDecorator('address', {
+                  rules: [
+                    {
+                      required: true,
+                      message: '请输入地址'
+                    }
+                  ]
+                })(<Input allowClear placeholder='请输入地址' />)}
               </Form.Item>
               <Form.Item label='标签'>
                 {getFieldDecorator('tags')(
-                  <Input
-                    suffix={
-                      <Tooltip title='多个标签用英文标点隔开'>
-                        <Icon
-                          type='info-circle'
-                          style={{ color: 'rgba(0,0,0,.45)' }}
-                        />
-                      </Tooltip>
-                    }
-                  />
+                  <Input.TextArea placeholder='多个标签使用标点分隔' />
                 )}
               </Form.Item>
             </Form>
