@@ -19,21 +19,20 @@ import { bindActionCreators } from 'redux';
 import moment from 'moment';
 import './manage.less';
 
-// interface propsType {
-//   // form: any;
-//   // history: any;
-//   manage: Array<Manage>;
-//   form: any;
-// }
+interface propsType {
+  manage: Array<Manage>;
+  form: any;
+  addManInfo: (v: Manage) => Array<Manage>;
+}
 interface stateType {
   visible: boolean;
 }
 
-class ManageInfo extends Component<any, stateType> {
-  constructor(props: any) {
+class ManageInfo extends Component<propsType, stateType> {
+  constructor(props: propsType) {
     super(props);
     this.state = {
-      visible: false
+      visible: false,
     };
   }
 
@@ -50,7 +49,7 @@ class ManageInfo extends Component<any, stateType> {
           tags: (values.tags || '').split(/[,，]+/)
         });
         this.setState({
-          visible: false
+          visible: false,
         });
       }
     });
