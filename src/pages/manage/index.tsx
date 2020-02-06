@@ -9,6 +9,8 @@ import {
   Button,
   DatePicker,
   Tooltip,
+  Popconfirm,
+  message,
   Icon
 } from 'antd';
 const { RangePicker } = DatePicker;
@@ -23,6 +25,8 @@ interface propsType {
   manage: Array<Manage>;
   form: any;
   addManInfo: (v: Manage) => Array<Manage>;
+  delManInfo: (v: Manage) => Array<Manage>;
+        editManInfo:(v: Manage) => Array<Manage>;
 }
 interface stateType {
   visible: boolean;
@@ -61,11 +65,15 @@ class ManageInfo extends Component<propsType, stateType> {
   }
 
   render() {
+    const {delManInfo} = this.props;
+    const confirm = function name(p: any): void {
+      delManInfo(p);
+    };
     const columns = [
       {
         title: '姓名',
         dataIndex: 'name',
-        key: 'name',
+        key: 'name'
       },
       {
         title: '年龄',
@@ -105,11 +113,19 @@ class ManageInfo extends Component<propsType, stateType> {
       {
         title: '操作',
         key: 'action',
-        render: (text: string, record: any) => (
+        render: (text: any) => (
           <span>
             <a>编辑</a>
-            <Divider type='vertical' />
-            <a>删除</a>
+            <Popconfirm
+              placement='top'
+              title='是否删除'
+              onConfirm={() => confirm(text)}
+              okText='确认'
+              cancelText='取消'
+            >
+              <Divider type='vertical' />
+              <a>删除</a>
+            </Popconfirm>
           </span>
         )
       }
