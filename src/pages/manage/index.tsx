@@ -26,23 +26,30 @@ interface propsType {
   form: any;
   addManInfo: (v: Manage) => Array<Manage>;
   delManInfo: (v: Manage) => Array<Manage>;
-        editManInfo:(v: Manage) => Array<Manage>;
+  editManInfo: (v: Manage) => Array<Manage>;
 }
 interface stateType {
   visible: boolean;
+  isEdit: boolean;
 }
 
 class ManageInfo extends Component<propsType, stateType> {
   constructor(props: propsType) {
     super(props);
     this.state = {
-      visible: false
+      visible: false,
+      isEdit: false
     };
   }
 
   open() {
     this.props.form.resetFields();
     this.setState({ visible: true });
+  }
+
+  edit(e: any) {
+    e.preventDefault();
+    this.setState({ visible: true, isEdit: true });
   }
 
   handleOk(e: any) {
@@ -60,14 +67,16 @@ class ManageInfo extends Component<propsType, stateType> {
         this.setState({
           visible: false
         });
+        message.success('新增成功');
       }
     });
   }
 
   render() {
-    const {delManInfo} = this.props;
+    const { delManInfo } = this.props;
     const confirm = function name(p: any): void {
       delManInfo(p);
+      message.success('删除成功');
     };
     const columns = [
       {
@@ -115,7 +124,7 @@ class ManageInfo extends Component<propsType, stateType> {
         key: 'action',
         render: (text: any) => (
           <span>
-            <a>编辑</a>
+            <a onClick={edit}>编辑</a>
             <Popconfirm
               placement='top'
               title='是否删除'
@@ -133,6 +142,7 @@ class ManageInfo extends Component<propsType, stateType> {
     const { getFieldDecorator } = this.props.form;
     const handleOk = this.handleOk.bind(this);
     const open = this.open.bind(this);
+    const edit = this.edit.bind(this);
 
     return (
       <div className='login_man'>
@@ -150,12 +160,12 @@ class ManageInfo extends Component<propsType, stateType> {
           </Button>
           <Table columns={columns} dataSource={this.props.manage} />
           <Modal
-            title='新增'
+            title={this.state.isEdit ? '编辑' : '新增'}
             okText='确定'
             cancelText='取消'
             visible={this.state.visible}
             onOk={handleOk}
-            onCancel={() => this.setState({ visible: false })}
+            onCancel={() => this.setState({ visible: false, isEdit: false })}
           >
             <Form
               style={{ margin: '20px auto' }}
@@ -205,8 +215,6 @@ class ManageInfo extends Component<propsType, stateType> {
   }
 }
 
-const manageForm = Form.create({ name: 'man' })(ManageInfo);
-
 export default connect(
   (state: any) => {
     return {
@@ -222,4 +230,4 @@ export default connect(
       },
       dispatch
     )
-)(manageForm);
+)(Form.create({ name: 'manage' })(ManageInfo));
