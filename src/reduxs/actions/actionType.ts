@@ -39,7 +39,7 @@ export interface Manage {
   age: number;
   time: string;
   address: string;
-  tags: Array<string>;
+  tags: string;
 }
 
 export interface addManage {

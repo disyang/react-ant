@@ -8,7 +8,7 @@ const initSate: Array<Manage> = [
     age: 32,
     time: '2020-02-05 14:49:00',
     address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer']
+    tags: 'nice,developer'
   },
   {
     key: '2',
@@ -16,7 +16,7 @@ const initSate: Array<Manage> = [
     age: 42,
     time: '2020-02-05 14:49:00',
     address: 'London No. 1 Lake Park',
-    tags: ['loser']
+    tags: 'loser'
   },
   {
     key: '3',
@@ -24,7 +24,7 @@ const initSate: Array<Manage> = [
     age: 32,
     time: '2020-02-05 14:49:00',
     address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher']
+    tags: 'cool,teacher'
   }
 ];
 

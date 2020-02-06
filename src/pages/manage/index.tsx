@@ -43,12 +43,19 @@ class ManageInfo extends Component<propsType, stateType> {
   }
 
   open() {
+    this.data = {
+      key: '',
+      name: '',
+      age: '',
+      address: '',
+      tags: ''
+    };
     this.props.form.resetFields();
     this.setState({ visible: true });
   }
 
-  edit(e: any) {
-    e.preventDefault();
+  edit(text: any) {
+    Object.assign(this.data, text);
     this.setState({ visible: true, isEdit: true });
   }
 
@@ -56,21 +63,41 @@ class ManageInfo extends Component<propsType, stateType> {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err: any, values: any) => {
       if (!err) {
-        this.props.addManInfo({
-          key: `${Date.now()}`,
-          name: values.name || '',
-          age: values.age || '',
-          time: moment().format('YYYY-MM-DD HH:mm:ss'),
-          address: values.address || '',
-          tags: (values.tags || '').split(/[,，]+/)
-        });
+        if (this.state.isEdit) {
+          this.props.editManInfo({
+            key: this.data.key,
+            name: values.name || '',
+            age: values.age || '',
+            time: moment().format('YYYY-MM-DD HH:mm:ss'),
+            address: values.address || '',
+            tags: values.tags || ''
+          });
+          message.success('编辑成功');
+        } else {
+          this.props.addManInfo({
+            key: `${Date.now()}`,
+            name: values.name || '',
+            age: values.age || '',
+            time: moment().format('YYYY-MM-DD HH:mm:ss'),
+            address: values.address || '',
+            tags: values.tags || ''
+          });
+          message.success('新增成功');
+        }
         this.setState({
           visible: false
         });
-        message.success('新增成功');
       }
     });
   }
+
+  private data = {
+    key: '',
+    name: '',
+    age: '',
+    address: '',
+    tags: ''
+  };
 
   render() {
     const { delManInfo } = this.props;
@@ -103,9 +130,9 @@ class ManageInfo extends Component<propsType, stateType> {
         title: '标签',
         key: 'tags',
         dataIndex: 'tags',
-        render: (tags: Array<string>) => (
+        render: (tags: string) => (
           <span>
-            {tags.map(tag => {
+            {(tags || '').split(/[,，]+/).map(tag => {
               let color = tag.length > 5 ? 'geekblue' : 'green';
               if (tag === 'loser') {
                 color = 'volcano';
@@ -124,7 +151,7 @@ class ManageInfo extends Component<propsType, stateType> {
         key: 'action',
         render: (text: any) => (
           <span>
-            <a onClick={edit}>编辑</a>
+            <a onClick={() => edit(text)}>编辑</a>
             <Popconfirm
               placement='top'
               title='是否删除'
@@ -174,6 +201,7 @@ class ManageInfo extends Component<propsType, stateType> {
             >
               <Form.Item label='姓名'>
                 {getFieldDecorator('name', {
+                  initialValue: this.data.name,
                   rules: [
                     {
                       required: true,
@@ -184,6 +212,7 @@ class ManageInfo extends Component<propsType, stateType> {
               </Form.Item>
               <Form.Item label='年龄'>
                 {getFieldDecorator('age', {
+                  initialValue: this.data.age,
                   rules: [
                     {
                       required: true,
@@ -194,6 +223,7 @@ class ManageInfo extends Component<propsType, stateType> {
               </Form.Item>
               <Form.Item label='地址'>
                 {getFieldDecorator('address', {
+                  initialValue: this.data.address,
                   rules: [
                     {
                       required: true,
@@ -203,9 +233,9 @@ class ManageInfo extends Component<propsType, stateType> {
                 })(<Input allowClear placeholder='请输入地址' />)}
               </Form.Item>
               <Form.Item label='标签'>
-                {getFieldDecorator('tags')(
-                  <Input.TextArea placeholder='多个标签使用标点分隔' />
-                )}
+                {getFieldDecorator('tags', {
+                  initialValue: this.data.tags
+                })(<Input.TextArea placeholder='多个标签使用标点分隔' />)}
               </Form.Item>
             </Form>
           </Modal>
