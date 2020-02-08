@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import Eform from '@pages/user';
 import Comment from '@pages/comment';
 import './home.less';
-import Manage from '@pages/manage'
+import Manage from '@pages/manage';
+import System from '@pages/system';
 
 const { Header, Sider, Content } = Layout;
 
@@ -73,9 +74,10 @@ export default class SiderDemo extends Component<any, stateType> {
     );
     const cb = (index: number) => {
       if (index === 0) return <Eform />;
-      else if (index === 2) return <Manage />
-      else if (index === 5)
+      else if (index === 2) return <Manage />;
+      else if (index === 5) {
         return <Comment login={this.props.match.params.username} />;
+      } else if (index === 1) return <System />;
       else return 'none';
     };
     return (

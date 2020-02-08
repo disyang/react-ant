@@ -22,5 +22,9 @@ export function loggingIdentity<T extends Lengthwise>(arg: T): T {
   return arg;
 }
 
+export function sum(a: number, b: number): number {
+  return a + b;
+}
+
 
 
