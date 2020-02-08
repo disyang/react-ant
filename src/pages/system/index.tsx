@@ -3,7 +3,7 @@
  *
  * 当你点击每个按钮会发生什么？
  */
-import React, { Component } from 'react';
+import React from 'react';
 
 export default class App extends React.Component<any, any> {
   constructor(props: any) {
