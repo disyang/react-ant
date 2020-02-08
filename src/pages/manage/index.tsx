@@ -8,10 +8,8 @@ import {
   Input,
   Button,
   DatePicker,
-  Tooltip,
   Popconfirm,
-  message,
-  Icon
+  message
 } from 'antd';
 const { RangePicker } = DatePicker;
 import { addManInfo, delManInfo, editManInfo } from '@reduxs/reducers/manage';
