@@ -1,7 +1,4 @@
-import { sum } from '../utils';
-
-afterEach(() => {
-});
+import { sum, divisor } from '../utils';
 
 describe('测试', () => {
   test('测试1', () => {
@@ -22,5 +19,17 @@ describe.each([
 ])('name %i + %i', (a, b, expected) => {
   test(`return${expected}`, () => {
     expect(sum(a, b)).toBe(expected);
+  });
+});
+
+describe.each([
+  [1, 2, 2],
+  [5, 7, 35],
+  [3, 6, 6],
+  [11, 5, 55],
+  [34, 10, 170]
+])('name %i + %i', (a, b, expected) => {
+  test(`return-> ${expected}`, () => {
+    expect(divisor(a, b)).toBe(expected);
   });
 });

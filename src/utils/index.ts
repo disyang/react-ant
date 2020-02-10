@@ -12,7 +12,6 @@ export function identity<T>(arg: T): T {
   return arg;
 }
 
-
 interface Lengthwise {
   length: number;
 }
@@ -26,5 +25,14 @@ export function sum(a: number, b: number): number {
   return a + b;
 }
 
-
-
+// 求公约数
+export function divisor(A: number, B: number): number {
+  if (A > B) [A, B] = [B, A];
+  let i: number = 1;
+  while (i <= A) {
+    const total = i * B;
+    if (total % A === 0) return total;
+    i++;
+  }
+  return A * B;
+}
