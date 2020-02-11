@@ -17,7 +17,7 @@ describe.each([
   [105, 2, 107],
   [100, 2, 102]
 ])('name %i + %i', (a, b, expected) => {
-  test(`return${expected}`, () => {
+  test(`return-> ${expected}`, () => {
     expect(sum(a, b)).toBe(expected);
   });
 });
