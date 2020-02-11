@@ -24,9 +24,9 @@ react + typescript + redux + react-router + webpack + ES6/7 + less + antd
 
 
 ```
-git clone https://github.com/yht1989/vue2-elm  
+git clone https://github.com/disyang/react-ant 
 
-cd vue2-elm
+cd react-ant
 
 npm install 
 
@@ -37,7 +37,6 @@ npm run build (打包编译)
 npm run dll (抽离第三方模块, react、antd、axios, react-router, react)
 
 npm run analyz (依赖关系图)
-
 
 访问: http://localhost:8080
 
