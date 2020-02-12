@@ -1,4 +1,4 @@
-import { sum, divisor } from '../utils';
+import { sum, divisor, longestWord } from '../utils';
 
 describe('测试', () => {
   test('测试1', () => {
@@ -31,5 +31,14 @@ describe.each([
 ])('name %i + %i', (a, b, expected) => {
   test(`return-> ${expected}`, () => {
     expect(divisor(a, b)).toBe(expected);
+  });
+});
+
+describe.each([
+  [['w', 'wo', 'wor', 'worl', 'world'], 'world'],
+  [['a', 'banana', 'app', 'appl', 'ap', 'apply', 'apple'], 'apple']
+])('name -> ', (a, expected) => {
+  test(`return-> ${expected}`, () => {
+    expect(longestWord(a)).toBe(expected);
   });
 });

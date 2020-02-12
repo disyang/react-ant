@@ -36,3 +36,35 @@ export function divisor(A: number, B: number): number {
   }
   return A * B;
 }
+
+// 词典最长单词
+export const longestWord = function(words: Array<string>) {
+  words.sort();
+  let list: Array<string> = [];
+  let s = '';
+  for (let i = 0; i < words.length; i++) {
+    if (words[i].length === 1) {
+      s = big(s, list.pop() || '');
+      list = [words[i]];
+    } else if (list.length) {
+      const end = list[list.length - 1];
+      if (end.length === words[i].length + 1 && words[i].startsWith(end)) {
+        list.push(list[i]);
+      } else {
+        s = big(s, list.pop() || '');
+        list = [];
+      }
+    }
+  }
+  return s;
+};
+
+function big(s: string, w: string) {
+  if (!w) return s;
+  if (s.length > w.length) return s;
+  else if (s.length < w.length) return w;
+  else {
+    const list = [s, w].sort();
+    return list[0];
+  }
+}
