@@ -6,6 +6,7 @@ import Comment from '@pages/comment';
 import './home.less';
 import Manage from '@pages/manage';
 import System from '@pages/system';
+import Drop from '@components/drop';
 
 const { Header, Sider, Content } = Layout;
 
@@ -72,12 +73,21 @@ export default class SiderDemo extends Component<any, stateType> {
         </Menu.Item>
       </Menu>
     );
+    const dropList = [
+      { id: 1, name: '标签1' },
+      { id: 2, name: '标签2' },
+      { id: 3, name: '标签3' },
+      { id: 4, name: '标签4' },
+      { id: 5, name: '标签5' },
+      { id: 6, name: '标签6' }
+    ];
     const cb = (index: number) => {
       if (index === 0) return <Eform />;
       else if (index === 2) return <Manage />;
       else if (index === 5) {
         return <Comment login={this.props.match.params.username} />;
       } else if (index === 1) return <System />;
+      else if (index === 4) return <Drop dragList={dropList} />;
       else return 'none';
     };
     return (
