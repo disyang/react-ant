@@ -12,13 +12,12 @@ function resolve(r) {
 }
 
 module.exports = {
-  entry: {
-    app: resolve('../src/App.tsx')
-  },
+  entry: resolve('../src/App.tsx'),
   output: {
-    filename: 'js/[name].[hash:8].js',
+    // hash chunkHash contentHash
+    filename: 'js/[name].[chunkhash:8].js',
     path: resolve('../dist'),
-    chunkFilename: 'chunks/[name].[hash:8].js'
+    chunkFilename: 'chunks/[name].[chunkhash:8].js',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
@@ -34,23 +33,33 @@ module.exports = {
       '@hooks': resolve('../src/hooks'),
       '@mocks': resolve('../src/mocks'),
       '@constants': resolve('../src/constants'),
-    }
+    },
   },
   performance: {
     hints: false, // 枚举
     maxAssetSize: 300000, // 整数类型（以字节为单位）
     maxEntrypointSize: 500000, // 整数类型（以字节为单位）
-    assetFilter: function(assetFilename) {
+    assetFilter: function (assetFilename) {
       return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
-    }
+    },
   },
   module: {
     rules: [
       {
         test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
-        include: [resolve('../src')],
-        loader: 'happypack/loader?id=happyBabel'
+        include: resolve('../src'),
+        loaders: [
+          {
+            loader: 'thread-loader',
+          },
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+            },
+          },
+        ],
       },
       {
         test: /\.(css|less)$/,
@@ -58,8 +67,8 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'less-loader'
-        ]
+          'less-loader',
+        ],
       },
       {
         test: /\.(jpe?g|png|gif)$/i, //图片文件
@@ -74,12 +83,12 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: 'img/[name].[ext]'
-                }
-              }
-            }
-          }
-        ]
+                  name: 'img/[name].[ext]',
+                },
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/, //媒体文件
@@ -91,12 +100,12 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: 'media/[name].[contenthash].[ext]'
-                }
-              }
-            }
-          }
-        ]
+                  name: 'media/[name].[contenthash].[ext]',
+                },
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i, // 字体
@@ -108,14 +117,14 @@ module.exports = {
               fallback: {
                 loader: 'file-loader',
                 options: {
-                  name: 'fonts/[name].[contenthash].[ext]'
-                }
-              }
-            }
-          }
-        ]
-      }
-    ]
+                  name: 'fonts/[name].[contenthash].[ext]',
+                },
+              },
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -129,12 +138,12 @@ module.exports = {
         {
           loader: 'babel-loader',
           options: {
-            cacheDirectory: true
-          }
-        }
+            cacheDirectory: true,
+          },
+        },
       ],
       threadPool: happyThreadPool,
-      verbose: false
+      verbose: false,
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new HtmlWebpackPlugin({
@@ -142,19 +151,19 @@ module.exports = {
       favicon: resolve('../public/favicon.ico'),
       title: 'ant-app',
       minify: {
-        collapseWhitespace: true //删除空格、换行
-      }
+        collapseWhitespace: true, //删除空格、换行
+      },
     }),
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require(resolve('../dll/app-manifest.json')),
       name: './my-dll.js',
       scope: 'xyz',
-      sourceType: 'commonjs2'
+      sourceType: 'commonjs2',
     }),
     new CopyWebpackPlugin([
       // 拷贝生成的文件到dist目录 这样每次不必手动去cv
-      { from: resolve('../dll'), to: 'dll', ignore: ['*.json'] }
-    ])
-  ]
+      { from: resolve('../dll'), to: 'dll', ignore: ['*.json'] },
+    ]),
+  ],
 };

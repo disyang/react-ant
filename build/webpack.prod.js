@@ -11,23 +11,23 @@ function resolve(p) {
 module.exports = merge(webpackConfig, {
   mode: 'production',
   devtool: 'cheap-module-souce-map',
-  optimization: {
-    minimizer: [
-      new TerserJSPlugin({
-        // 多进程压缩
-        // 设置缓存目录
-        cache: path.resolve('.cache'),
-        parallel: 4, // 开启多进程压缩
-        // sourceMap,
-        terserOptions: {
-          compress: {
-            // 删除所有的 `console` 语句
-            drop_console: true
-          }
-        }
-      })
-    ]
-  },
+  // optimization: {
+  //   minimizer: [
+  //     new TerserJSPlugin({
+  //       // 多进程压缩
+  //       // 设置缓存目录
+  //       cache: path.resolve('.cache'),
+  //       parallel: 4, // 开启多进程压缩
+  //       // sourceMap,
+  //       terserOptions: {
+  //         compress: {
+  //           // 删除所有的 `console` 语句
+  //           drop_console: true
+  //         }
+  //       }
+  //     })
+  //   ]
+  // },
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),

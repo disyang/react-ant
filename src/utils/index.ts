@@ -1,5 +1,17 @@
+import type { Alarm, ab } from './type'
+
+const test: ab = '123'
+
+export class Test implements Alarm {
+  id = '123';
+  name = 'yht';
+  toString() {
+    return this.name;
+  }
+}
+
 // 实现斐波那契
-export const cb = function(s: string): string {
+export const cb = function(s: Alarm): string {
   return s.toString();
 };
 
