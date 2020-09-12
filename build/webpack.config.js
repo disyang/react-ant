@@ -15,7 +15,7 @@ module.exports = {
   entry: resolve('../src/App.tsx'),
   output: {
     // hash chunkHash contentHash
-    filename: 'js/[name].[chunkhash:8].js',
+    filename: 'js/[name].[hash:8].js',
     path: resolve('../dist'),
     chunkFilename: 'chunks/[name].[chunkhash:8].js',
   },
