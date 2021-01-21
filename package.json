@@ -71,7 +71,7 @@
     "redux": "^4.0.1",
     "redux-chunk": "^1.0.11",
     "sinon": "~4.1.6",
-    "socket.io": "2.0.4",
+    "socket.io": "2.4.0",
     "supervisor": "^0.12.0",
     "terser-webpack-plugin": "^2.2.1",
     "ts-jest": "^25.2.0",
